@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+import paginate from "mongoose-paginate-v2";
 
 const categorySchema = new Schema(
   {
@@ -8,7 +9,6 @@ const categorySchema = new Schema(
     },
     description: {
       type: String,
-      required: true,
     },
   },
   {
@@ -16,6 +16,8 @@ const categorySchema = new Schema(
     versionKey: false,
   }
 );
+
+categorySchema.plugin(paginate);
 
 const Category = mongoose.model("Category", categorySchema);
 export default Category;
