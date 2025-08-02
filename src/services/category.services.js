@@ -21,3 +21,14 @@ export const getALlCategoryServices = async (req, res, next) => {
     .status(200)
     .json(createResponse(true, 200, "Lấy danh sách thành công", categories));
 };
+
+export const getDetailedCategoryServices = async (req, res, next) => {
+  const { id } = req.params;
+  if (!id) {
+    return next(createError(400, "Chưa gửi lên id của danh mục"));
+  }
+  const foundCategory = await Category.findById(id);
+  return res
+    .status(200)
+    .json(createResponse(true, 200, "Lấy chi tiết danh mục", foundCategory));
+};
