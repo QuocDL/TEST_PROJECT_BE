@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+import paginate from "mongoose-paginate-v2";
 
 const brandSchema = new Schema(
   {
@@ -16,6 +17,6 @@ const brandSchema = new Schema(
     versionKey: false,
   }
 );
-
+brandSchema.plugin(paginate);
 const Brand = mongoose.model("Brand", brandSchema);
 export default Brand;

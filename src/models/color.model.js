@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import paginate from "mongoose-paginate-v2";
 
 const colorSchema = new mongoose.Schema(
   {
@@ -16,6 +17,8 @@ const colorSchema = new mongoose.Schema(
     versionKey: false,
   }
 );
+
+colorSchema.plugin(paginate);
 
 const Color = mongoose.model("Color", colorSchema);
 export default Color;
