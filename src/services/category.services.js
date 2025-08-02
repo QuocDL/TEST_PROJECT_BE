@@ -32,3 +32,24 @@ export const getDetailedCategoryServices = async (req, res, next) => {
     .status(200)
     .json(createResponse(true, 200, "Lấy chi tiết danh mục", foundCategory));
 };
+
+export const updateCategoryService = async (req, res, next) => {
+  const { id } = req.params;
+  if (!id) {
+    return next(
+      createError(400, !id ? "Chưa gửi lên id của danh mục" : "Validation")
+    );
+  }
+  const foundCategory = await Category.findById(id);
+  if (!foundCategory) {
+    return next(createError(400, `Không tìm thấy danh mục với id là ${id}`));
+  }
+  const updatedCategory = await Category.findByIdAndUpdate(
+    id,
+    { ...req.body },
+    { new: true }
+  );
+  return res
+    .status(200)
+    .json(createResponse(true, 200, "Cập nhật thành công", updatedCategory));
+};
