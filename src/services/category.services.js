@@ -44,6 +44,13 @@ export const updateCategoryService = async (req, res, next) => {
   if (!foundCategory) {
     return next(createError(400, `Không tìm thấy danh mục với id là ${id}`));
   }
+  const existingCategory = await Category.findOne({
+    _id: { $ne: id },
+    name: req.body.name,
+  });
+  if (existingCategory) {
+    return next(createError(400, "Đã tồn tại danh mục  này."));
+  }
   const updatedCategory = await Category.findByIdAndUpdate(
     id,
     { ...req.body },
