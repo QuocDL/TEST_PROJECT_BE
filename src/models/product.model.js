@@ -22,15 +22,19 @@ const productSchema = new Schema(
     price: {
       type: Number,
       min: 1000,
-      required: true
+      required: true,
     },
     stock: {
       type: Number,
-      default: 1
+      default: 1,
+    },
+    sold: {
+      type: Number,
+      default: 0,
     },
     sizes: {
-      type: [string],
-      enum: ["36","37","38","39","40","41","42","43","44","45"],
+      type: [String],
+      enum: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"],
       required: true,
     },
     category: {
