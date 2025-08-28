@@ -12,7 +12,7 @@ export const uploadImage = handleASync(async (req, res, next) => {
   const { downloadUrl } = await uploadSingleFile(file);
   return res
     .status(200)
-    .json(createResponse(downloadUrl, "Upload thành công", true, 200));
+    .json(createResponse(true, 200, "Upload anh thanh cong", downloadUrl));
 });
 
 export const uploadImages = handleASync(async (req, res, next) => {
@@ -20,12 +20,12 @@ export const uploadImages = handleASync(async (req, res, next) => {
   if (!files) {
     throw createError(400, "Bạn chưa upload ảnh");
   }
-  const images = []
-  for(const file of files['images']){
-    const image = await uploadSingleFile(file)
-    images.push(image.downloadUrl)
+  const images = [];
+  for (const file of files["images"]) {
+    const image = await uploadSingleFile(file);
+    images.push(image.downloadUrl);
   }
-    return res
+  return res
     .status(200)
-    .json(createResponse(images, "Upload thành công", true, 200));
+    .json(createResponse(true, 200, "Upload thành công", images));
 });
